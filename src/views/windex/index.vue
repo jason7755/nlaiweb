@@ -1,48 +1,66 @@
 <template lang="pug">
-#content
-  //- vue-waterfall-easy(ref="waterfall",:imgsArr="imgsArr",@scrollReachBottom="getData", @click="clickFn", :enablePullDownEvent="true", @pullDownMove="pullDownMove",@pullDownEnd="pullDownEnd")
-  vue-waterfall-easy(
-    ref="waterfall",
-    :imgsArr="imgsArr",
-    @scrollReachBottom="getData",
-    @click="clickFn",
-    @imgError="imgErrorFn"
-  )
+  el-container()
+    el-header(style="height:100px;width:100%")
+      navbar()
+      //- div.demo-input-suffix
+      //-   el-input(
+      //-     style="width:400px;height:80px;line-hieght:80px;",
+      //-     placeholder="搜索模型、图片",
+      //-     suffix-icon="el-icon-search",
+      //-     v-model="searchKey"
+      //-   )
+    el-container()
+      el-aside(style="width:200px;display:flx;align-items:center;justify-content:center;")
+        el-tabs(tab-position="left", style="height: 200px;")
+          el-tab-pane(label="模型广场")
+          el-tab-pane(label="精美图片")
+      el-main(style="height:1000px;")
+        //- vue-waterfall-easy(ref="waterfall",:imgsArr="imgsArr",@scrollReachBottom="getData", @click="clickFn", :enablePullDownEvent="true", @pullDownMove="pullDownMove",@pullDownEnd="pullDownEnd")
+        vue-waterfall-easy(
+          ref="waterfall",
+          :imgsArr="imgsArr",
+          @scrollReachBottom="getData",
+          @click="clickFn",
+          @imgError="imgErrorFn"
+        )
 
-    .img-info(slot-scope="props")
-      //- p.some-info {{ props.value.info }}
-      //- div.some-title 第 ({{ props.index + 1 }}) 张图片
-      div.some-title {{ props.value.user}}
-      div.img-info-to-left {{props.value.modeltype}}
+          .img-info(slot-scope="props")
+            //- p.some-info {{ props.value.info }}
+            //- div.some-title 第 ({{ props.index + 1 }}) 张图片
+            div.some-title {{ props.value.user}}
+            div.img-info-to-left {{props.value.modeltype}}
 
-    //- div(slot="waterfall-head")
-      h1 waterfall-head
-      h1 waterfall-head
-    //- .img-group(slot-scope="props"){
-      position: relative;
-      display: inline-block
-    //- }
-    //- .img(slot="src")
+          //- div(slot="waterfall-head")
+            h1 waterfall-head
+            h1 waterfall-head
+          //- .img-group(slot-scope="props"){
+            position: relative;
+            display: inline-block
+          //- }
+          //- .img(slot="src")
 
-  //- 自定义加载动画
-  //- div(slot="loading" slot-scope="{isFirstLoad}")
-    div(slot="loading" v-if="isFirstLoad") first-loading...
-    div(v-else) loading...
+        //- 自定义加载动画
+        //- div(slot="loading" slot-scope="{isFirstLoad}")
+          div(slot="loading" v-if="isFirstLoad") first-loading...
+          div(v-else) loading...
 </template>
 
 <script>
 import vueWaterfallEasy from 'vue-waterfall-easy'
+import { Navbar } from '../../layout/components'
 // import axios from "axios";
 export default {
   name: 'App',
   components: {
-    vueWaterfallEasy
+    vueWaterfallEasy,
+    Navbar
   },
   data() {
     return {
       imgsArr: [],
       group: 0, // 当前加载的加载图片的次数
-      pullDownDistance: 0
+      pullDownDistance: 0,
+      searchKey: ''
     }
   },
   methods: {
@@ -104,7 +122,7 @@ export default {
     // },
     pullDownMove(pullDownDistance) {
       // console.log('pullDownDistance', pullDownDistance)
-      this.pullDownDistance = pullDownDistance;
+      this.pullDownDistance = pullDownDistance
     },
 
     pullDownEnd(pullDownDistance) {
@@ -113,9 +131,8 @@ export default {
         alert('下拉刷新')
       }
       this.pullDownDistance = 0
-    },
+    }
   },
-
   created() {
     this.getData()
 
