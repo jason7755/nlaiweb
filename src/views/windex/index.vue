@@ -15,14 +15,21 @@
           el-tab-pane(label="模型广场")
           el-tab-pane(label="精美图片")
       el-main(style="height:1000px;")
-        //- vue-waterfall-easy(ref="waterfall",:imgsArr="imgsArr",@scrollReachBottom="getData", @click="clickFn", :enablePullDownEvent="true", @pullDownMove="pullDownMove",@pullDownEnd="pullDownEnd")
+        //- vue-waterfall-easy(
+          ref="waterfall",
+          :imgsArr="imgsArr",
+          @scrollReachBottom="getData",
+          @click="clickFn",
+          @imgError="imgErrorFn",
+          :enablePullDownEvent="true",
+          @pullDownMove="pullDownMove",
+          @pullDownEnd="pullDownEnd")
         vue-waterfall-easy(
           ref="waterfall",
           :imgsArr="imgsArr",
           @scrollReachBottom="getData",
           @click="clickFn",
-          @imgError="imgErrorFn"
-        )
+          @imgError="imgErrorFn")
 
           .img-info(slot-scope="props")
             //- p.some-info {{ props.value.info }}
@@ -30,9 +37,6 @@
             div.some-title {{ props.value.user}}
             div.img-info-to-left {{props.value.modeltype}}
 
-          //- div(slot="waterfall-head")
-            h1 waterfall-head
-            h1 waterfall-head
           //- .img-group(slot-scope="props"){
             position: relative;
             display: inline-block
@@ -197,7 +201,7 @@ body,
   position: relative;
 
   .img-info-to-left {
-    position: absolute; z-index:2; top: 10px; left: 10px; color: #fff; font-weight: bold;
+    position: absolute; z-index:2; top: 10px; left: 10px; background:rgb(47, 45, 45); color: #fff; font-weight: bold;
   }
 
   // .some-info {
@@ -206,11 +210,11 @@ body,
   // }
 
   .some-info {
-    position: absolute; z-index:2; bottom: 80px; right: 20px; color: #fff;
+    position: absolute; z-index:2; bottom: 80px; right: 20px; background:rgb(22, 22, 22); color: #fff;
   }
 
   .some-title {
-    position: absolute; z-index:2; bottom: 20px; left: 20px; color: #fff;
+    position: absolute; z-index:2; bottom: 20px; left: 20px; opacity: 0.5; background:#000; color: #fff;
   }
 }
 </style>

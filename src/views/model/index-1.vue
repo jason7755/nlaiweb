@@ -65,11 +65,11 @@ export default {
       for (var i = 0; i < 50; i++) {
         var num = Math.floor(Math.random() * 113) + 1
         var ext = 'png'
-        var username = 'jason'
+        var username = 'Jason'
         var modeltypename = 'Lora'
         if (num > 35 && num < 51) {
           ext = 'jpg'
-          username = 'yadong'
+          username = 'Yadong'
           modeltypename = 'checkpoint'
         }
 
